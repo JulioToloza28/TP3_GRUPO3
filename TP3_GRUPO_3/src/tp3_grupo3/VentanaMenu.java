@@ -1,4 +1,7 @@
 package tp3_grupo3;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +31,9 @@ public class VentanaMenu extends JFrame{
 		btnEjer1=new JButton();
 		btnEjer1.setText("Ejercicio 1");
 		btnEjer1.setBounds(180, 100, 140, 30);
+		btnEjer1.addActionListener(new eventoBoton1());
 		getContentPane().add(btnEjer1);
+		
 		
 		// boton de ejercicio2
 		btnEjer2=new JButton();
@@ -46,5 +51,19 @@ public class VentanaMenu extends JFrame{
 	public void cambiarVisibilidad(boolean estado) {
 		setVisible(estado);
 	}
+	
+	
 
 }
+
+	class eventoBoton1 implements ActionListener
+	{
+		public eventoBoton1() {}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			VentanaEjercicio1 ejerc1 = new VentanaEjercicio1();
+			ejerc1.cambiarVisibilidad(true);
+		}
+	}
