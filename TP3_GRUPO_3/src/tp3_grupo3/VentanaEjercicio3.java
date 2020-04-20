@@ -81,7 +81,8 @@ public class VentanaEjercicio3 extends JFrame
 		);
 		PanelSistemaOperativo.setLayout(gl_PanelSistemaOperativo);
 		
-		//PARA AGRUPAR LOS OPTION BUTTON Y SOLO PODAMOS ELEGIR UNO
+		//PARA AGRUPAR LOS OPTION BUTTON 
+		// Y SOLO PODAMOS ELEGIR UNO
 		ButtonGroup grupo1 = new ButtonGroup();
 		grupo1.add(rdbtnLinux);
 		grupo1.add(rdbtnWindows);
