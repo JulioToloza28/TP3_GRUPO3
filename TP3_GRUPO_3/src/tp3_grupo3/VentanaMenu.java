@@ -46,6 +46,7 @@ public class VentanaMenu extends JFrame{
 		btnEjer3=new JButton();
 		btnEjer3.setText("Ejercicio 3");
 		btnEjer3.setBounds(180, 300, 140, 30);
+		btnEjer3.addActionListener(new eventoBoton3());
 		getContentPane().add(btnEjer3);
 			
 	}
@@ -76,6 +77,19 @@ public class VentanaMenu extends JFrame{
 		{
 			VentanaEjercicio2 ejerc2 = new VentanaEjercicio2();
 			ejerc2.cambiarVisibilidad(true);
+		}
+		
+	}
+	
+	class eventoBoton3 implements ActionListener
+	{
+		public eventoBoton3() {}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			VentanaEjercicio3 ejerc3 = new VentanaEjercicio3();
+			ejerc3.cambiarVisibilidad(true);
 		}
 		
 	}
