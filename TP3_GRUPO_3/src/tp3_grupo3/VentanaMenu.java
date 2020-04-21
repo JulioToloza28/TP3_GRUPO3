@@ -39,20 +39,20 @@ public class VentanaMenu extends JFrame{
 		btnEjer2=new JButton();
 		btnEjer2.setText("Ejercicio 2");
 		btnEjer2.setBounds(180, 200, 140, 30);
+		btnEjer2.addActionListener(new eventoBoton2());
 		getContentPane().add(btnEjer2);
 
 		// boton de ejercicio3
 		btnEjer3=new JButton();
 		btnEjer3.setText("Ejercicio 3");
 		btnEjer3.setBounds(180, 300, 140, 30);
+		btnEjer3.addActionListener(new eventoBoton3());
 		getContentPane().add(btnEjer3);
 			
 	}
 	public void cambiarVisibilidad(boolean estado) {
 		setVisible(estado);
 	}
-	
-	
 
 }
 
@@ -66,4 +66,30 @@ public class VentanaMenu extends JFrame{
 			VentanaEjercicio1 ejerc1 = new VentanaEjercicio1();
 			ejerc1.cambiarVisibilidad(true);
 		}
+	}
+	
+	class eventoBoton2 implements ActionListener
+	{
+		public eventoBoton2() {}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			VentanaEjercicio2 ejerc2 = new VentanaEjercicio2();
+			ejerc2.cambiarVisibilidad(true);
+		}
+		
+	}
+	
+	class eventoBoton3 implements ActionListener
+	{
+		public eventoBoton3() {}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			VentanaEjercicio3 ejerc3 = new VentanaEjercicio3();
+			ejerc3.cambiarVisibilidad(true);
+		}
+		
 	}
