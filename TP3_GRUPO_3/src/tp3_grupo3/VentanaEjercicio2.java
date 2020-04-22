@@ -118,23 +118,38 @@ public class VentanaEjercicio2 extends JFrame
 			{	
 				txtCondicion.setText("");
 				float promedio=0;
+				int nota1=0;
+				int nota2=0;
+				int nota3=0;
+						
 				
-				//Condicion 1
-				if(cmbTps.getSelectedItem()=="Desaprobado") 
-				{
-					txtCondicion.setText("Libre");
-				}
 				//Validacion numeros y calculo de promedio
 				if(soloNumeros(txtNota1.getText())&&soloNumeros(txtNota2.getText())&&soloNumeros(txtNota3.getText())) 
 				{	
+					nota1=Integer.parseInt(txtNota1.getText());
+					nota2=Integer.parseInt(txtNota2.getText());
+					nota3=Integer.parseInt(txtNota3.getText());					
 					promedio = calcularPromedio(txtNota1.getText(),txtNota2.getText(),txtNota3.getText());			
 					txtPromedio.setText(String.valueOf(promedio));
 				}
+				//Condicion 1
+				if(cmbTps.getSelectedItem()=="Desaprobado") 
+				{
+					txtCondicion.setText("Libre");return;
+				}
 				//Condicion 2
-				if(Integer.parseInt(txtNota1.getText())<=6 || Integer.parseInt(txtNota2.getText())<=6 || Integer.parseInt(txtNota3.getText())<=6)
+				if(Integer.parseInt(txtNota1.getText())<6 || Integer.parseInt(txtNota2.getText())<6 || Integer.parseInt(txtNota3.getText())<6)
 				{
 					txtCondicion.setText("Libre");
+					return;
 				}
+				//Condicion 3
+				if(Integer.parseInt(txtNota1.getText())>=8 && Integer.parseInt(txtNota2.getText())>=8 && Integer.parseInt(txtNota3.getText())>=8&& cmbTps.getSelectedItem()=="Aprobado")
+				{txtCondicion.setText("Promocionado");return; }
+				//Condicion 4
+				if((nota1>=6 && nota1<=8)|| (nota2>=6 && nota2<=8) || (nota3>=6 && nota3<=8) && cmbTps.getSelectedItem()=="Aprobado") 
+				{txtCondicion.setText("Regular");return;}
+				
 			}
 		});
 		
