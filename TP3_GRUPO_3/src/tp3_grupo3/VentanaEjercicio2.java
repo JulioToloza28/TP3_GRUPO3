@@ -7,19 +7,23 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaEjercicio2 extends JFrame 
 {
-	private JTextField txtNota1;
 	private JTextField txtNota2;
 	private JTextField txtNota3;
 	private JTextField txtPromedio;
 	private JTextField txtCondicion;
+	private JTextField txtNota1;
 	public VentanaEjercicio2() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
@@ -92,11 +96,13 @@ public class VentanaEjercicio2 extends JFrame
 		PanelNotas2.add(lblCondicion);
 		
 		txtPromedio = new JTextField();
+		txtPromedio.setEditable(false);
 		txtPromedio.setBounds(105, 52, 156, 20);
 		PanelNotas2.add(txtPromedio);
 		txtPromedio.setColumns(10);
 		
 		txtCondicion = new JTextField();
+		txtCondicion.setEditable(false);
 		txtCondicion.setBounds(105, 124, 156, 20);
 		PanelNotas2.add(txtCondicion);
 		txtCondicion.setColumns(10);
@@ -106,6 +112,31 @@ public class VentanaEjercicio2 extends JFrame
 		//btnCalcular.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCalcular.setBounds(310, 72, 141, 35);
 		getContentPane().add(btnCalcular);
+		btnCalcular.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{	
+				txtCondicion.setText("");
+				float promedio=0;
+				
+				//Condicion 1
+				if(cmbTps.getSelectedItem()=="Desaprobado") 
+				{
+					txtCondicion.setText("Libre");
+				}
+				//Validacion numeros y calculo de promedio
+				if(soloNumeros(txtNota1.getText())&&soloNumeros(txtNota2.getText())&&soloNumeros(txtNota3.getText())) 
+				{	
+					promedio = calcularPromedio(txtNota1.getText(),txtNota2.getText(),txtNota3.getText());			
+					txtPromedio.setText(String.valueOf(promedio));
+				}
+				//Condicion 2
+				if(Integer.parseInt(txtNota1.getText())<=6 || Integer.parseInt(txtNota2.getText())<=6 || Integer.parseInt(txtNota3.getText())<=6)
+				{
+					txtCondicion.setText("Libre");
+				}
+			}
+		});
 		
 		JButton btnNuevo = new JButton("Nuevo");
 		btnNuevo.setForeground(UIManager.getColor("CheckBox.shadow"));
@@ -121,8 +152,57 @@ public class VentanaEjercicio2 extends JFrame
 		setVisible(true);
 	}
 	
+	
 	public void cambiarVisibilidad(boolean estado) 
 	{
 		setVisible(estado);
 	}
+	
+	public float calcularPromedio(String valor1,String valor2, String valor3) 
+	{ 
+	 int suma=Integer.parseInt(valor1);
+	 suma=suma+Integer.parseInt(valor2);
+	 suma=suma+Integer.parseInt(valor3);
+	 float promedio = suma/3;
+	 return promedio;
+	}
+	
+	public boolean soloNumeros(String cadena) {
+	  try 
+	  {
+		int num=Integer.parseInt(cadena);
+		if(num>=1 && num<=10 ) 
+		{
+			//JOptionPane.showMessageDialog(null, "ok");
+			return true;
+		}
+		else 
+		{
+		   JOptionPane.showMessageDialog(null, "Solo numeros entre 1 y 10");
+		   return false;
+		}
+	  }
+	  catch(NumberFormatException e) 
+	  {
+		JOptionPane.showMessageDialog(null, "Solo numeros entre 1 y 10");
+		return false;
+	  }
+	}
+
+	
+
+
+	
+/*	public boolean validarNumero(String cadena) {
+		boolean entradaNumerica = true;
+		
+        for (int i=0;i< cadena.length(); i++) 
+        {
+            if (Character.isDigit(cadena.charAt(i)) == false) {
+                entradaNumerica = false;
+                break;
+
+            } else {System.out.println("Solo numeros"); }
+        }*/
 }
+

@@ -7,7 +7,6 @@ public class Principal {
 		
 		VentanaMenu ventanaMenu=new VentanaMenu();
 		ventanaMenu.cambiarVisibilidad(true);
-
 	}
 
 }

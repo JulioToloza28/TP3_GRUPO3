@@ -14,7 +14,7 @@ public class VentanaEjercicio1 extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setBounds(375,40,500,500);
-		setTitle("Ejercicio 1");
+		setTitle("Contacto");
 		setVisible(true);
 		getContentPane().setLayout(null);
 		
