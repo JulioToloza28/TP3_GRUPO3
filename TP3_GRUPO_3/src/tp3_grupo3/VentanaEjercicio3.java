@@ -25,7 +25,10 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
 
 public class VentanaEjercicio3 extends JFrame 
 {
@@ -164,20 +167,31 @@ public class VentanaEjercicio3 extends JFrame
 					leyenda = leyenda + " - " +chckbxDisenoGrafico.getText();
 				}
 				
-				if(txtCantHoras.getText() != "")
+				if(txtCantHoras.getText().isEmpty())
 				{
-					leyenda = leyenda + " - " +txtCantHoras.getText()+ " Hs";
+					JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de horas");
+					txtCantHoras.requestFocus(); //PARA PONERLE EL FOCUS AL CONTROL
 				}
-				
-				//PARA CREAR LA MODAL QUE MUESTRA LOS DATOS ELEGIDOS 
-				//POR EL USUARIO
-				JOptionPane.showMessageDialog(null, leyenda);
-				
-				//PARA INICIALIZAR LOS VALORES
-				txtCantHoras.setText("");
-				ckProgramacion.setSelected(false);
-				chckbxAdministracion.setSelected(false);
-				chckbxDisenoGrafico.setSelected(false);
+				else {
+					boolean resp = soloNumeros(txtCantHoras.getText());
+					if(resp) {
+						leyenda = leyenda + " - " +txtCantHoras.getText()+ " Hs";
+						
+						//PARA CREAR LA MODAL QUE MUESTRA LOS DATOS ELEGIDOS 
+						//POR EL USUARIO
+						JOptionPane.showMessageDialog(null, leyenda);
+						
+						//PARA INICIALIZAR LOS VALORES
+						txtCantHoras.setText("");
+						txtCantHoras.setBackground(Color.white);
+						ckProgramacion.setSelected(false);
+						chckbxAdministracion.setSelected(false);
+						chckbxDisenoGrafico.setSelected(false);
+						rdbtnLinux.setSelected(false);
+						rdbtnMac.setSelected(false);
+						rdbtnWindows.setSelected(false);
+					}
+				}
 			}
 		});
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -190,5 +204,20 @@ public class VentanaEjercicio3 extends JFrame
 	public void cambiarVisibilidad(boolean estado) 
 	{
 		setVisible(estado);
+	}
+	
+	public boolean soloNumeros(String cadena) {
+		  try 
+		  {
+			int num=Integer.parseInt(cadena);
+			return true;
+		  }
+		  catch(NumberFormatException e) 
+		  {
+			JOptionPane.showMessageDialog(null, "Solo numeros","Atencion", JOptionPane.WARNING_MESSAGE);
+			txtCantHoras.setText("");
+			txtCantHoras.requestFocus();//PARA PONERLE EL FOCO AL CONTROL
+			return false;
+		  }
 	}
 }
