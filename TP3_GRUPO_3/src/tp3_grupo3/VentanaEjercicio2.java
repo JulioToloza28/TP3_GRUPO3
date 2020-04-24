@@ -24,7 +24,9 @@ public class VentanaEjercicio2 extends JFrame
 	private JTextField txtPromedio;
 	private JTextField txtCondicion;
 	private JTextField txtNota1;
+
 	public VentanaEjercicio2() {
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setBounds(350,15,500,500);
@@ -154,12 +156,27 @@ public class VentanaEjercicio2 extends JFrame
 		});
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtNota1.setText("");
+				txtNota2.setText("");
+				txtNota3.setText("");
+				txtPromedio.setText("");
+				txtCondicion.setText("");
+				
+			}
+		});
 		btnNuevo.setForeground(UIManager.getColor("CheckBox.shadow"));
 		//btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNuevo.setBounds(310, 128, 141, 35);
 		getContentPane().add(btnNuevo);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnSalir.setForeground(UIManager.getColor("CheckBox.shadow"));
 		//btnSalir.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnSalir.setBounds(310, 184, 141, 35);
