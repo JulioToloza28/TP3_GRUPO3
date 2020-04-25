@@ -135,38 +135,38 @@ public class VentanaEjercicio3 extends JFrame
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent arg0) {
 				String leyenda="";
-				if(rdbtnLinux.isSelected()) 
-				{
-					leyenda=rdbtnLinux.getText();
-				}
+
+					if(rdbtnLinux.isSelected()) 
+					{
+						leyenda=rdbtnLinux.getText();
+					}
 				
-				if(rdbtnMac.isSelected()) 
-				{
-					leyenda = rdbtnMac.getText();
-				}
+					if(rdbtnMac.isSelected()) 
+					{
+						leyenda = rdbtnMac.getText();
+					}
 				
-				if(rdbtnWindows.isSelected()) 
-				{
-					leyenda = rdbtnWindows.getText();
-				}
-				
-				if(ckProgramacion.isSelected())
-				{
-					leyenda = leyenda +" - "+ ckProgramacion.getText();
-				}
-				
-				if(chckbxAdministracion.isSelected())
-				{
-					leyenda = leyenda +" - " +chckbxAdministracion.getText();
-				}
-				
-				if(chckbxDisenoGrafico.isSelected())
-				{
-					leyenda = leyenda + " - " +chckbxDisenoGrafico.getText();
-				}
-				
+					if(rdbtnWindows.isSelected()) 
+					{
+						leyenda = rdbtnWindows.getText();
+					}
+					if(ckProgramacion.isSelected())
+					{
+						leyenda = leyenda +" - "+ ckProgramacion.getText();
+					}
+					
+					if(chckbxAdministracion.isSelected())
+					{
+						leyenda = leyenda +" - " +chckbxAdministracion.getText();
+					}
+					
+					if(chckbxDisenoGrafico.isSelected())
+					{
+						leyenda = leyenda + " - " +chckbxDisenoGrafico.getText();
+					}
+
 				if(txtCantHoras.getText().isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de horas");
@@ -174,7 +174,9 @@ public class VentanaEjercicio3 extends JFrame
 				}
 				else {
 					boolean resp = soloNumeros(txtCantHoras.getText());
-					if(resp) {
+					boolean resp2 = validarRadioButton(rdbtnLinux.isSelected(), rdbtnMac.isSelected(),rdbtnWindows.isSelected());
+					boolean resp3 = validarCheckBox(ckProgramacion.isSelected(),chckbxAdministracion.isSelected(),chckbxDisenoGrafico.isSelected());
+					if(resp&&resp2&&resp3) {
 						leyenda = leyenda + " - " +txtCantHoras.getText()+ " Hs";
 						
 						//PARA CREAR LA MODAL QUE MUESTRA LOS DATOS ELEGIDOS 
@@ -201,11 +203,49 @@ public class VentanaEjercicio3 extends JFrame
 		getContentPane().add(btnAceptar);
 	}
 	
+
+
+	
 	public void cambiarVisibilidad(boolean estado) 
 	{
 		setVisible(estado);
 	}
 	
+	public boolean validarRadioButton(boolean a, boolean b, boolean c) 
+	{
+		try 
+		{
+			if(a==false && b==false && c==false) 
+			{
+				JOptionPane.showMessageDialog(null,"Debe seleccionar un Sistema Op.");
+				return false; 
+			}
+		}
+		catch(Exception e) 
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean validarCheckBox(boolean a, boolean b, boolean c) 
+	{
+		try 
+		{
+			if(a==false && b==false && c==false) 
+			{
+				JOptionPane.showMessageDialog(null,"Debe seleccionar una especialidad");
+				return false; 
+			}
+		}
+		catch(Exception e) 
+		{
+			return false;
+		}
+		return true;
+	}
+	
+
 	public boolean soloNumeros(String cadena) {
 		  try 
 		  {
