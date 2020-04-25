@@ -2,11 +2,15 @@ package tp3_grupo3;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JFormattedTextField;
 
 public class VentanaEjercicio1 extends JFrame{
 
@@ -35,7 +39,7 @@ public class VentanaEjercicio1 extends JFrame{
 		getContentPane().add(txtApellido);
 
 		
-		JLabel lblTelefono = new JLabel("Telefono:");
+		JLabel lblTelefono = new JLabel("Teléfono:");
 		lblTelefono.setBounds(50,150,92,26);
 		getContentPane().add(lblTelefono);
 		
@@ -48,9 +52,14 @@ public class VentanaEjercicio1 extends JFrame{
 		lblFechaNac.setBounds(50,200,100,26);
 		getContentPane().add(lblFechaNac);
 		
-		JTextField txtFechaNac = new JTextField();
-		txtFechaNac.setBounds(152,200,202,26);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		JFormattedTextField txtFechaNac = new JFormattedTextField(format);
+		txtFechaNac.setBounds(152, 202, 202, 23);
 		getContentPane().add(txtFechaNac);
+		
+		JLabel lblFechaNacAclaracion = new JLabel("(dd/mm/aaaa)");
+		lblFechaNacAclaracion.setBounds(364, 206, 120, 14);
+		getContentPane().add(lblFechaNacAclaracion);
 		
 		JButton btnMostrar = new JButton("Mostrar");
 		btnMostrar.setBounds(265, 262, 89, 23);
@@ -97,7 +106,7 @@ public class VentanaEjercicio1 extends JFrame{
 					txtApellido.setBackground(Color.WHITE);
 				}
 				
-				if(txtTelefono.getText().isEmpty()) {
+				if(txtTelefono.getText().isEmpty() || !soloNumeros(txtTelefono.getText(),"Teléfono")) {
 					txtTelefono.setBackground(Color.RED);
 					incompleto=true;
 				}else {
@@ -137,5 +146,23 @@ public class VentanaEjercicio1 extends JFrame{
 	
 	public void cambiarVisibilidad(boolean estado) {
 		setVisible(estado);
+	}
+	
+	public boolean soloNumeros(String cadena, String Propiedad) {
+		  try 
+		  {
+			int num=Integer.parseInt(cadena);
+			if(num<=0)
+			{
+				JOptionPane.showMessageDialog(null, Propiedad+": Sólo se admiten números positivos.","Atencion", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+			else return true;
+		  }
+		  catch(NumberFormatException e) 
+		  {
+			JOptionPane.showMessageDialog(null, Propiedad+": Sólo se admiten números.","Atencion", JOptionPane.WARNING_MESSAGE);
+			return false;
+		  }
 	}
 }

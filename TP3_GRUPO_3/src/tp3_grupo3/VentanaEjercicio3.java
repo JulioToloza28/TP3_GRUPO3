@@ -189,9 +189,7 @@ public class VentanaEjercicio3 extends JFrame
 						ckProgramacion.setSelected(false);
 						chckbxAdministracion.setSelected(false);
 						chckbxDisenoGrafico.setSelected(false);
-						rdbtnLinux.setSelected(false);
-						rdbtnMac.setSelected(false);
-						rdbtnWindows.setSelected(false);
+						grupo1.clearSelection();
 					}
 				}
 			}
@@ -250,11 +248,16 @@ public class VentanaEjercicio3 extends JFrame
 		  try 
 		  {
 			int num=Integer.parseInt(cadena);
-			return true;
+			if(num<=0)
+			{
+				JOptionPane.showMessageDialog(null, "Sólo números positivos","Atencion", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+			else return true;
 		  }
 		  catch(NumberFormatException e) 
 		  {
-			JOptionPane.showMessageDialog(null, "Solo numeros","Atencion", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Sólo números","Atencion", JOptionPane.WARNING_MESSAGE);
 			txtCantHoras.setText("");
 			txtCantHoras.requestFocus();//PARA PONERLE EL FOCO AL CONTROL
 			return false;
