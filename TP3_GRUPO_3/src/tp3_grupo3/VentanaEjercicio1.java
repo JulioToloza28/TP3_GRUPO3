@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
@@ -46,8 +48,7 @@ public class VentanaEjercicio1 extends JFrame{
 		JTextField txtTelefono = new JTextField();
 		txtTelefono.setBounds(152,150,202,26);
 		getContentPane().add(txtTelefono);
-
-		
+				
 		JLabel lblFechaNac = new JLabel("Fecha Nac.:");
 		lblFechaNac.setBounds(50,200,100,26);
 		getContentPane().add(lblFechaNac);
@@ -85,7 +86,19 @@ public class VentanaEjercicio1 extends JFrame{
 		lblMostrarDatos4.setBounds(205, 390, 269, 14);
 		getContentPane().add(lblMostrarDatos4);
 
-		
+		txtTelefono.addKeyListener(new KeyAdapter()
+		{
+		   public void keyTyped(KeyEvent e)
+		   {
+		      char caracter = e.getKeyChar();
+		      if(((caracter < '0') ||
+		         (caracter > '9')) &&
+		         (caracter != '\b' /*BACK_SPACE*/))
+		      {
+		         e.consume();  // ignora el evento de teclado
+		      }
+		   }
+		});
 		
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -106,7 +119,7 @@ public class VentanaEjercicio1 extends JFrame{
 					txtApellido.setBackground(Color.WHITE);
 				}
 				
-				if(txtTelefono.getText().isEmpty() || !soloNumeros(txtTelefono.getText(),"Teléfono")) {
+				if(txtTelefono.getText().isEmpty()) {
 					txtTelefono.setBackground(Color.RED);
 					incompleto=true;
 				}else {
@@ -136,33 +149,11 @@ public class VentanaEjercicio1 extends JFrame{
 					lblMostrarDatos3.setText("");
 					lblMostrarDatos4.setText("");
 				}
-				
-				
 			}
 		});
-		
-		
 	}
 	
 	public void cambiarVisibilidad(boolean estado) {
 		setVisible(estado);
-	}
-	
-	public boolean soloNumeros(String cadena, String Propiedad) {
-		  try 
-		  {
-			int num=Integer.parseInt(cadena);
-			if(num<=0)
-			{
-				JOptionPane.showMessageDialog(null, Propiedad+": Sólo se admiten números positivos.","Atencion", JOptionPane.WARNING_MESSAGE);
-				return false;
-			}
-			else return true;
-		  }
-		  catch(NumberFormatException e) 
-		  {
-			JOptionPane.showMessageDialog(null, Propiedad+": Sólo se admiten números.","Atencion", JOptionPane.WARNING_MESSAGE);
-			return false;
-		  }
 	}
 }
