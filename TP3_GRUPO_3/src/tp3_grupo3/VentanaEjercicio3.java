@@ -27,6 +27,8 @@ import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 
@@ -133,6 +135,20 @@ public class VentanaEjercicio3 extends JFrame
 		lblCantHoras.setBounds(26, 273, 224, 26);
 		getContentPane().add(lblCantHoras);
 		
+		txtCantHoras.addKeyListener(new KeyAdapter()
+		{
+		   public void keyTyped(KeyEvent e)
+		   {
+		      char caracter = e.getKeyChar();
+		      if(((caracter < '0') ||
+		         (caracter > '9')) &&
+		         (caracter != '\b' /*BACK_SPACE*/))
+		      {
+		         e.consume();  // ignora el evento de teclado
+		      }
+		   }
+		});
+		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
@@ -173,7 +189,7 @@ public class VentanaEjercicio3 extends JFrame
 					txtCantHoras.requestFocus(); //PARA PONERLE EL FOCUS AL CONTROL
 				}
 				else {
-					boolean resp = soloNumeros(txtCantHoras.getText());
+					boolean resp = !txtCantHoras.getText().isEmpty();
 					boolean resp2 = validarRadioButton(rdbtnLinux.isSelected(), rdbtnMac.isSelected(),rdbtnWindows.isSelected());
 					boolean resp3 = validarCheckBox(ckProgramacion.isSelected(),chckbxAdministracion.isSelected(),chckbxDisenoGrafico.isSelected());
 					if(resp&&resp2&&resp3) {
@@ -241,26 +257,5 @@ public class VentanaEjercicio3 extends JFrame
 			return false;
 		}
 		return true;
-	}
-	
-
-	public boolean soloNumeros(String cadena) {
-		  try 
-		  {
-			int num=Integer.parseInt(cadena);
-			if(num<=0)
-			{
-				JOptionPane.showMessageDialog(null, "Sólo números positivos","Atencion", JOptionPane.WARNING_MESSAGE);
-				return false;
-			}
-			else return true;
-		  }
-		  catch(NumberFormatException e) 
-		  {
-			JOptionPane.showMessageDialog(null, "Sólo números","Atencion", JOptionPane.WARNING_MESSAGE);
-			txtCantHoras.setText("");
-			txtCantHoras.requestFocus();//PARA PONERLE EL FOCO AL CONTROL
-			return false;
-		  }
 	}
 }
